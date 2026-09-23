@@ -66,4 +66,5 @@ Playback starts at `time = -LEAD_IN` (2 s) so the first notes fall into view.
 - Player and highway scan all notes per frame (marked `ponytail:`); fine for typical
   piano files, add a time-indexed cursor if large files stutter.
 - Synth is a triangle oscillator; a sampled piano would sound much better.
-- Keyboard range fixed to 88 keys; auto-fitting to the song's range is a later feature.
+- Keyboard range fixed to 88 keys; auto-fitting to the song's range is a later feature,
+  and would also give fat-finger-sized keys on a tablet (88 keys on an iPad is ~19 px each).

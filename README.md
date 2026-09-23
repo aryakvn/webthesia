@@ -12,7 +12,23 @@ npm test         # node --test, pure-logic checks
 npm run build    # static build in dist/
 ```
 
-WebMIDI and WebUSB need a secure context: `localhost` or HTTPS.
+The dev server runs over HTTPS on all network interfaces (`@vitejs/plugin-basic-ssl`),
+because WebMIDI, WebUSB and pointer input all need a secure context — plain
+`http://192.168.x.x` is not one.
+
+## Test on an iPad / phone
+
+1. `npm run dev` and use the printed **Network** URL, e.g. `https://192.168.0.98:5173/`.
+   Pick the address on the same Wi-Fi as the device (ignore VPN/VMware ones).
+2. The cert is self-signed, so Safari warns once: **Show Details → visit this website**.
+   Chrome on Android: **Advanced → Proceed**. Repeat after the cert expires (~30 days,
+   cached in `node_modules/.vite`; delete that folder to regenerate).
+3. If the page doesn't load at all, Windows Firewall is blocking the port — allow Node.js
+   on private networks, or `netsh advfirewall firewall add rule name="vite" dir=in
+   action=allow protocol=TCP localport=5173`.
+
+On iOS everything works except MIDI: Safari has no WebMIDI or WebUSB, so play by touch.
+No sound? The silent switch mutes WebAudio in Safari.
 
 ## Features (so far)
 
