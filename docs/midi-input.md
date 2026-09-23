@@ -38,6 +38,25 @@ So WebUSB is useful for devices exposing MIDI on a vendor-specific interface, cu
 firmware (e.g. microcontroller keyboards), or machines where WebMIDI is unavailable
 but the device has a WinUSB/libusb driver.
 
+## Testing without a MIDI device
+
+1. **Computer keyboard** (`composables/useComputerKeyboard.js`) — always on. `Z S X D C V G B
+   H N J M` is the lower octave, `Q 2 W 3 E R 5 T 6 Y 7 U` the one above, `-`/`=` shift
+   octave, and the current base octave shows in the "PC keys" chip. Keys are mapped by
+   `KeyboardEvent.code`, so the physical layout is what counts. It emits raw MIDI bytes
+   through the same `handleMidi` path as real devices, so it exercises that code too.
+2. **Dev console** — `npm run dev` exposes the stores:
+   ```js
+   webthesia.input.handleMidi([0x90, 60, 100]) // note on,  middle C
+   webthesia.input.handleMidi([0x80, 60, 0])   // note off
+   webthesia.player.seek(5)
+   ```
+3. **Virtual MIDI port** — to exercise the real WebMIDI stack, pair a virtual port with an
+   on-screen MIDI keyboard: loopMIDI + VMPK on Windows, the IAC driver + a MIDI app on
+   macOS, `snd-virmidi`/a2jmidid on Linux. The port shows up as a normal device chip.
+
+The WebUSB path is the one thing none of these cover; it needs actual hardware.
+
 ## Troubleshooting
 
 - No devices listed: check the site's MIDI permission (lock icon in the address bar),

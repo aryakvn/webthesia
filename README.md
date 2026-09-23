@@ -23,6 +23,8 @@ WebMIDI and WebUSB need a secure context: `localhost` or HTTPS.
 - Built-in demo song (Ode to Joy). Open any `.mid` file; percussion tracks are skipped.
 - Play/pause (Space), restart, seek, speed 0.25×–1.5×.
 - Input from all WebMIDI devices automatically, plus a WebUSB USB-MIDI driver.
+- Play without hardware: computer keyboard rows `Z`–`M` (lower octave) and `Q`–`P` (upper),
+  `-`/`=` shift octave. See [testing without a MIDI device](docs/midi-input.md#testing-without-a-midi-device).
 - Simple built-in synth for song playback and input monitoring (toggle "Input sound"
   off if your keyboard has its own speakers).
 

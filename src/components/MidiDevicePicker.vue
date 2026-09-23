@@ -1,5 +1,6 @@
 <script setup>
 import { computed, onMounted } from 'vue'
+import { useComputerKeyboard } from '@/composables/useComputerKeyboard'
 import { useWebMidi } from '@/composables/useWebMidi'
 import { useWebUsbMidi } from '@/composables/useWebUsbMidi'
 import { useInputStore } from '@/stores/input'
@@ -8,6 +9,7 @@ import { useInputStore } from '@/stores/input'
 const input = useInputStore()
 const midi = useWebMidi(input.handleMidi)
 const usb = useWebUsbMidi(input.handleMidi)
+const pc = useComputerKeyboard(input.handleMidi)
 
 const devices = computed(() => [
   ...midi.devices.value.map((d) => ({ key: `midi-${d.id}`, name: d.name, via: 'MIDI' })),
@@ -26,6 +28,9 @@ onMounted(midi.connect)
       </span>
       <span v-if="!devices.length" key="none" class="chip muted">
         {{ midi.supported ? 'No MIDI device' : 'WebMIDI unsupported' }}
+      </span>
+      <span key="pc" class="chip muted" title="Play with Z–M (lower) and Q–P (upper). − and = shift octave.">
+        PC keys: C{{ pc.octave.value }}
       </span>
     </TransitionGroup>
     <button v-if="usb.supported" class="btn" @click="usb.connect">Connect USB…</button>

@@ -30,3 +30,5 @@ Format (based on Keep a Changelog: https://keepachangelog.com/en/1.1.0/):
 - Add WebMIDI input from all connected devices with hot-plug support.
 - Add WebUSB USB-MIDI driver for vendor-specific/WinUSB devices.
 - Add built-in WebAudio synth for playback and input monitoring.
+- Add computer-keyboard input (Z–M / Q–P rows, -/= octave shift) so the app is playable without MIDI hardware.
+- Add dev-only `window.webthesia` store handle for driving input/playback from the console.

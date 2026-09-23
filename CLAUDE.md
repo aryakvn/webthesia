@@ -16,6 +16,8 @@ Read `docs/architecture.md` first. `npm test` runs node:test on pure utils.
 
 - `useWebMidi(onMessage)` → `{ supported, devices, error, connect }`; all inputs, hot-plug aware.
 - `useWebUsbMidi(onMessage)` → same shape; `connect()` must run from a user gesture.
+- `useComputerKeyboard(onMessage)` → `{ octave }`; PC keyboard as a MIDI source, no hardware needed.
+  In dev, `window.webthesia.{input,player}` exposes the stores for console testing.
 
 ## Utils (src/utils)
 
