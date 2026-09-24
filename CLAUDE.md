@@ -16,6 +16,8 @@ Read `docs/architecture.md` first. Capacitor wraps `dist/` for iOS/Android (`doc
 
 - `useWebMidi(onMessage)` → `{ supported, devices, error, connect }`; all inputs, hot-plug aware.
 - `useWebUsbMidi(onMessage)` → same shape; `connect()` must run from a user gesture.
+- `useNativeMidi(onMessage)` → same shape; iOS/Android app only, via the in-repo `NativeMidi`
+  Capacitor plugin (`docs/mobile.md`).
 - `useComputerKeyboard(onMessage)` → `{ octave }`; PC keyboard as a MIDI source, no hardware needed.
   In dev, `window.webthesia.{input,player}` exposes the stores for console testing.
 
@@ -24,7 +26,8 @@ Read `docs/architecture.md` first. Capacitor wraps `dist/` for iOS/Android (`doc
 - `keyboardLayout.js` — `isBlack(midi)`, `keyLayout(low, high)` → `[{ midi, black, x, w }]`
   in 0..1 width fractions; `trackColor(track, black)`.
 - `midi.js` — `parseMidiMessage(bytes)` → `{ on, note, velocity } | null`;
-  `usbMidiPackets(bytes)` → 3-byte messages; `findMidiIn(usbConfiguration)`.
+  `usbMidiPackets(bytes)` → 3-byte messages;
+  `splitMidiMessages(bytes)` → messages from a raw stream (running status); `findMidiIn(usbConfiguration)`.
 - `songs.js` — song format, `demoSong`, `songFromMidiFile(file)`.
 - `synth.js` — `resume()`, `playNote(midi, vel, dur)`, `noteOn(midi, vel)`, `noteOff(midi)`.
 

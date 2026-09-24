@@ -34,3 +34,25 @@ export function findMidiIn(config) {
   }
   return fallback
 }
+
+// Split a raw MIDI 1.0 byte stream (one native packet, may hold several messages)
+// into single channel messages. Handles running status; drops SysEx, system and
+// real-time messages.
+export function splitMidiMessages(bytes) {
+  const out = []
+  let status = 0
+  for (let i = 0; i < bytes.length; ) {
+    const b = bytes[i]
+    if (b >= 0x80) {
+      if (b < 0xf8) status = b < 0xf0 ? b : 0 // real-time (0xF8+) keeps running status
+      i++
+      continue
+    }
+    if (!status) { i++; continue } // SysEx / system data or stray byte
+    const len = (status & 0xe0) === 0xc0 ? 1 : 2 // program change / channel pressure: 1 byte
+    if (i + len > bytes.length) break
+    out.push([status, ...bytes.slice(i, i + len)])
+    i += len
+  }
+  return out
+}

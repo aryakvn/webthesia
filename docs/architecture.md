@@ -13,6 +13,7 @@ src/
   composables/
     useWebMidi.js            listen to all WebMIDI inputs
     useWebUsbMidi.js         USB-MIDI class driver over WebUSB
+    useNativeMidi.js         iOS/Android app: MIDI via the in-repo NativeMidi plugin
   stores/
     player.js                song + playback clock (rAF), which song notes are sounding
     input.js                 notes currently held by the player, from any source
@@ -28,6 +29,7 @@ tests/midi.test.js           node:test checks for the pure utils
 
 ```
 MIDI device ──WebMIDI──┐
+native app ─NativeMidi─┤
 USB device ───WebUSB───┼─ raw bytes ─► input.handleMidi ─► input.pressed ─► PianoKeyboard
 mouse/touch ───────────┘                     └─► synth (if Input sound)
 

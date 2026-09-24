@@ -1,13 +1,16 @@
 <script setup>
+import { Capacitor } from '@capacitor/core'
 import { computed, onMounted } from 'vue'
 import { useComputerKeyboard } from '@/composables/useComputerKeyboard'
+import { useNativeMidi } from '@/composables/useNativeMidi'
 import { useWebMidi } from '@/composables/useWebMidi'
 import { useWebUsbMidi } from '@/composables/useWebUsbMidi'
 import { useInputStore } from '@/stores/input'
 
 // Self-contained: connects input devices and feeds them into the input store.
 const input = useInputStore()
-const midi = useWebMidi(input.handleMidi)
+// Native apps get MIDI through the in-repo Capacitor plugin; browsers through WebMIDI.
+const midi = (Capacitor.isNativePlatform() ? useNativeMidi : useWebMidi)(input.handleMidi)
 const usb = useWebUsbMidi(input.handleMidi)
 const pc = useComputerKeyboard(input.handleMidi)
 
@@ -23,7 +26,7 @@ onMounted(midi.connect)
 <template>
   <div class="picker">
     <TransitionGroup name="chip" tag="div" class="chips">
-      <span v-for="d in devices" :key="d.key" class="chip" :title="`Connected via Web${d.via}`">
+      <span v-for="d in devices" :key="d.key" class="chip" :title="`Connected via ${d.via}`">
         <i class="dot" />{{ d.name }}<small>{{ d.via }}</small>
       </span>
       <span v-if="!devices.length" key="none" class="chip muted">

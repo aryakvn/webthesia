@@ -28,8 +28,22 @@ provisioning profile (`xcodebuild archive` + `-exportArchive`).
 
 ## Limits in the native apps
 
-- No MIDI hardware: neither WKWebView (iOS) nor Android WebView exposes WebMIDI or
-  WebUSB, so the device picker shows them unsupported. Touch and a hardware/Bluetooth
-  computer keyboard still work. Real MIDI needs a native plugin (CoreMIDI /
-  `android.media.midi`) feeding `input.handleMidi`.
+- Neither web view exposes WebMIDI or WebUSB, so MIDI goes through the in-repo
+  `NativeMidi` plugin instead (below). The "Connect USB…" button is hidden.
+- Bluetooth MIDI: on iOS it works once the keyboard is paired in another app
+  (e.g. GarageBand); on Android it isn't supported yet (needs a BLE scan +
+  `MidiManager.openBluetoothDevice`). USB MIDI works on both (USB-C / camera adapter / OTG).
+
+## Native MIDI plugin
+
+Local plugin, no npm package: `android/app/src/main/java/com/aryakvn/webthesia/NativeMidiPlugin.java`
+(`android.media.midi`, registered in `MainActivity`) and `ios/App/App/NativeMidiPlugin.swift`
+(CoreMIDI, registered by `BridgeViewController` in the same file, which `Main.storyboard` uses).
+
+JS API (`useNativeMidi.js` wraps it, same shape as `useWebMidi`):
+
+- `start()` → `{ devices: [{ id, name }] }`, opens every input, hot-plug aware. Idempotent.
+- `'midi'` event → `{ data: number[] }`, raw bytes; may hold several messages, so run
+  them through `splitMidiMessages`.
+- `'devices'` event → `{ devices }` whenever the list changes.
 - The iOS silent switch still mutes WebAudio.

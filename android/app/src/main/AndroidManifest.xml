@@ -35,6 +35,9 @@
         </provider>
     </application>
 
+    <!-- MIDI via android.media.midi (NativeMidiPlugin); optional so non-MIDI devices can install -->
+    <uses-feature android:name="android.software.midi" android:required="false" />
+
     <!-- Permissions -->
 
     <uses-permission android:name="android.permission.INTERNET" />

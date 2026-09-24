@@ -36,3 +36,4 @@ Format (based on Keep a Changelog: https://keepachangelog.com/en/1.1.0/):
 - Add GitHub repo links (github.com/aryakvn/webthesia) to README and package.json metadata.
 - Add Capacitor iOS/Android wrapper (`android/`, `ios/`, `npm run cap:sync`).
 - Add GitHub Actions workflow building a debug APK and unsigned IPA, attached to releases on `v*` tags.
+- Add in-repo `NativeMidi` Capacitor plugin (CoreMIDI on iOS, android.media.midi on Android) so the mobile apps take MIDI keyboard input.

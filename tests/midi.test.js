@@ -1,6 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { findMidiIn, parseMidiMessage, usbMidiPackets } from '../src/utils/midi.js'
+import { findMidiIn, parseMidiMessage, splitMidiMessages, usbMidiPackets } from '../src/utils/midi.js'
 import { keyLayout } from '../src/utils/keyboardLayout.js'
 
 test('parseMidiMessage', () => {
@@ -13,6 +13,12 @@ test('parseMidiMessage', () => {
 test('usbMidiPackets keeps channel messages, drops others and partial packets', () => {
   const bytes = [0x09, 0x90, 60, 100, 0x0f, 0xf8, 0, 0, 0x18, 0x80, 60, 0, 0x09, 0x90]
   assert.deepEqual(usbMidiPackets(bytes), [[0x90, 60, 100], [0x80, 60, 0]])
+})
+
+test('splitMidiMessages: several messages, running status, SysEx and real-time dropped', () => {
+  const bytes = [0x90, 60, 100, 62, 90, 0xf8, 0xc0, 5, 0xf0, 1, 2, 3, 0xf7, 0x80, 60, 0, 0x90, 64]
+  assert.deepEqual(splitMidiMessages(bytes), [[0x90, 60, 100], [0x90, 62, 90], [0xc0, 5], [0x80, 60, 0]])
+  assert.deepEqual(splitMidiMessages([0x90, 60, 100]), [[0x90, 60, 100]])
 })
 
 test('findMidiIn prefers MIDIStreaming over vendor interface', () => {
