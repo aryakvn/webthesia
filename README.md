@@ -3,9 +3,12 @@
 Browser-based Synthesia clone: notes fall down a highway onto an on-screen piano,
 and you play along on a MIDI keyboard (or the mouse/touch).
 
+Repo: <https://github.com/aryakvn/webthesia>
+
 ## Run
 
 ```sh
+git clone git@github.com:aryakvn/webthesia.git && cd webthesia
 npm install
 npm run dev      # http://localhost:5173
 npm test         # node --test, pure-logic checks

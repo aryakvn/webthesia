@@ -33,3 +33,4 @@ Format (based on Keep a Changelog: https://keepachangelog.com/en/1.1.0/):
 - Add computer-keyboard input (Z–M / Q–P rows, -/= octave shift) so the app is playable without MIDI hardware.
 - Add dev-only `window.webthesia` store handle for driving input/playback from the console.
 - Serve the dev server over HTTPS on all interfaces so phones/tablets can load it in a secure context.
+- Add GitHub repo links (github.com/aryakvn/webthesia) to README and package.json metadata.

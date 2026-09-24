@@ -2,6 +2,14 @@
   "name": "webthesia",
   "version": "1.0.0",
   "description": "Web-based Synthesia-style piano trainer",
+  "homepage": "https://github.com/aryakvn/webthesia#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aryakvn/webthesia.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aryakvn/webthesia/issues"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
