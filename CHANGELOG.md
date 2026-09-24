@@ -22,6 +22,8 @@ Format (based on Keep a Changelog: https://keepachangelog.com/en/1.1.0/):
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-09-24
+
 ### Added
 - Add Vue 3 + Vite + Pinia project scaffold with docs (README, docs/, CLAUDE.md).
 - Add 88-key on-screen piano with song/input highlighting and mouse/touch play.
