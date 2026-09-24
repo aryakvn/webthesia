@@ -1,7 +1,7 @@
 # Webthesia
 
 Synthesia clone in the browser. Vue 3 `<script setup>`, plain JS, Pinia setup stores, Vite.
-Read `docs/architecture.md` first. `npm test` runs node:test on pure utils.
+Read `docs/architecture.md` first. Capacitor wraps `dist/` for iOS/Android (`docs/mobile.md`). `npm test` runs node:test on pure utils.
 
 ## Components (src/components)
 

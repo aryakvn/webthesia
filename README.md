@@ -47,6 +47,12 @@ No sound? The silent switch mutes WebAudio in Safari.
 - Simple built-in synth for song playback and input monitoring (toggle "Input sound"
   off if your keyboard has its own speakers).
 
+## iOS / Android apps
+
+Capacitor wraps the web build as native apps; CI builds an APK and an unsigned IPA
+on every push to `main` (Actions → *Mobile builds* → artifacts). See
+[docs/mobile.md](docs/mobile.md).
+
 ## Browser support
 
 | Feature | Chrome/Edge | Firefox | Safari |
@@ -59,4 +65,5 @@ No sound? The silent switch mutes WebAudio in Safari.
 
 - [docs/architecture.md](docs/architecture.md) — structure, data flow, song format
 - [docs/midi-input.md](docs/midi-input.md) — WebMIDI vs WebUSB, device troubleshooting
+- [docs/mobile.md](docs/mobile.md) — Capacitor iOS/Android wrapper and CI builds
 - [CHANGELOG.md](CHANGELOG.md)

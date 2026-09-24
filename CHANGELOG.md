@@ -34,3 +34,5 @@ Format (based on Keep a Changelog: https://keepachangelog.com/en/1.1.0/):
 - Add dev-only `window.webthesia` store handle for driving input/playback from the console.
 - Serve the dev server over HTTPS on all interfaces so phones/tablets can load it in a secure context.
 - Add GitHub repo links (github.com/aryakvn/webthesia) to README and package.json metadata.
+- Add Capacitor iOS/Android wrapper (`android/`, `ios/`, `npm run cap:sync`).
+- Add GitHub Actions workflow building a debug APK and unsigned IPA, attached to releases on `v*` tags.
